@@ -1,75 +1,248 @@
-# Residency Day 1: Project Deliverable 1: Data Collection, Cleaning, and Exploration
+# Advanced Data Mining for Data-Driven Insights and Predictive Modeling
 
-**Abstract / Project Overview**
-This project focuses on the Credit Card Fraud Detection Dataset, which contains real-world credit card transaction data collected from European cardholders back in September 2013. The main objective here is to accurately identify fraudulent transactions by applying various data mining and machine learning techniques.
-**Dataset Snapshot**
-•	Total Records: 284,807 transactions
-•	Total Attributes: 31 columns
-•	Input Features: 30 numerical variables
-•	Target Variable: Class
+## Project Deliverable 1: Data Collection, Cleaning, and Exploration
 
-**Key Attributes**
-•	Time: Seconds elapsed between each transaction and the first transaction in the dataset.
-•	V1 - V28: Principal components obtained using PCA transformation (anonymized for privacy).
-•	Amount: Total transaction amount.
-•	Class: Target variable where 0 denotes a normal/legitimate transaction and 1 denotes a fraud transaction.
+**Course:** 2026 Summer - Advanced Big Data and Data Mining<br>
+**Course Number:** MSCS-634-M20<br>
+**Residency:** July 24-26, 2026
 
-**Why this dataset?**
-Fraud detection is a real-world problem that requires a solid grasp of data preprocessing, feature engineering, classification models, and anomaly detection. Since the dataset has a massive number of records and features, it is perfect for implementing advanced ML techniques.
+## Group Members
 
-**Data Cleaning and Preprocessing**
-We performed the following data cleaning and preprocessing steps to prepare the dataset for modeling:
-Step 1: Loading & Inspection
-•	Imported the raw CSV file using pandas.
-•	Checked the overall structure, dimensions (.shape), column names, and data types (.info()).
-•	Ran statistical summaries (.describe()) to inspect feature distributions and scale.
-Step 2: Missing Value Check
-•	Checked all columns for NaN / null values using .isnull().sum().
-•	Result: Zero missing values were found, so no imputation strategies (like mean/median replacement) were required.
-Step 3: Removing Duplicates
-•	Checked for duplicate rows using df.duplicated().
-•	Dropped duplicate records to make sure repeated entries don't skew our model's performance or cause data leakage.
-Step 4: Data Type Verification
-•	Verified that all features are in numerical format (float64 / int64).
-•	Since everything is already numeric, no categorical encoding (like One-Hot or Label Encoding) was needed.
-Step 5: Class Imbalance Analysis
-•	Calculated the frequency distribution of legitimate vs. fraudulent transactions using .value_counts().
-•	Result: Found extreme class imbalance fraudulent cases make up less than 1% of the total dataset.
-•	Plan for Modeling: To handle this imbalance, we will apply techniques like:
-o	SMOTE (Synthetic Minority Over-sampling Technique)
-o	Random Undersampling
-o	Adjusting class_weight parameter in ML models
+1. Ashish Mahajan
+2. Murali Krishna Vattikunta
+3. Sreesh Sattiyamourthy
+4. Sreeharsha Varma Tinnanuri
 
-**Exploratory Data Analysis (EDA)**
-EDA was carried out using matplotlib and seaborn libraries to visualize underlying trends.
-•	Transaction Amount Analysis: Plotted distribution plots for the Amount feature. Observed that most transaction values are small, with a few extreme high-value outliers.
-•	Fraud vs. Normal Comparison: Separated the dataset into fraud and non-fraud subsets to compare distribution patterns across features.
-•	Correlation Analysis: Generated a heatmap correlation matrix to analyze feature relationships. Noticed that several V1-V28 PCA features show strong negative/positive correlations with the target Class.
-•	Time-Based Analysis: Analyzed transaction frequency against Time and engineered an Hour feature to identify peak fraud hours.
+## Project Overview
 
-**Key Insights Obtained****
-1.	Scalability: The large volume of records makes it an ideal dataset for scalable data mining experiments.
-2.	Severe Imbalance: Fraud cases are extremely rare, so plain accuracy metrics will be misleading; we must use Precision, Recall, F1-Score, and ROC-AUC.
-3.	Amount Variances: Fraudulent transactions exhibit different spending patterns compared to regular transactions.
-4.	PCA Utility: Even though V1-V28 features are anonymized, their statistical distributions show distinct variance between normal and fraudulent classes.
-5.	Time Patterns: Time-based engineering gives useful contextual signals for detecting irregular transaction bursts.
-6.	Clean Baseline: Post-cleaning, the dataset is robust and ready for feature engineering, clustering, and classification algorithms.
-5. Challenges Encountered & Workarounds
-   
-**Challenge 1: Severe Class Imbalance**
-•	Problem: Normal transactions heavily outnumber fraud cases, causing the model to overfit to the majority class.
-•	Workaround: Highlighted this issue during EDA. Resampling methods (SMOTE / Undersampling) and weighted loss functions will be implemented in the next phase.
-**Challenge 2: Anonymized Features (V1–V28)**
-•	Problem: Features are PCA-transformed due to domain privacy, making domain-specific feature interpretation tricky.
-•	Workaround: Retained all PCA components as they hold high variance and statistical significance crucial for fraud prediction.
-**Challenge 3: High Dataset Volume**
-•	Problem: Processing 280k+ rows can slow down certain computations and plot renderings.
-•	Workaround: Used vectorised panda’s operations and optimized memory usage, avoiding redundant loops and heavy transformations during EDA.
-**Challenge 4: Subtle Fraud Patterns**
-•	Problem: Fraudulent transactions don't follow rigid rules and closely mimic normal user behavior.
-•	Workaround: Combined correlation heatmaps, boxplots, and feature engineering to isolate subtle differences before passing data to ML algorithms.
+This residency project develops a complete data-mining workflow for credit-card transaction analysis. Deliverable 1 establishes the data foundation through schema inspection, exact-duplicate cleaning, extreme-value diagnostics, class-imbalance analysis, exploratory feature engineering, and focused visualizations. Later deliverables will build regression, classification, clustering, and discretized pattern-mining analyses from this shared foundation.
 
-**Conclusion**
-Phase 1 of the project covering data acquisition, data cleaning, and Exploratory Data Analysis has been completed successfully. The dataset was thoroughly audited, duplicate records were dropped, data types were verified, and key distributional patterns were identified.
-The findings from this phase will directly inform the next steps, which include Feature Scaling (StandardScaler), SMOTE Resampling, Model Building (Logistic Regression, Random Forest, XGBoost), and final evaluation using relevant metrics.
-<img width="468" height="638" alt="image" src="https://github.com/user-attachments/assets/a67415ee-07ea-4de2-b434-690aade83da0" />
+## Dataset
+
+The project uses only the [Credit Card Fraud Detection dataset](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) from Kaggle. The original dataset contains transaction-level numerical records with:
+
+- `Time`: seconds elapsed since the first transaction
+- `V1` through `V28`: anonymized PCA-transformed numerical features
+- `Amount`: transaction amount
+- `Class`: `0` for legitimate and `1` for fraudulent
+
+The dataset exceeds the project requirements of 500 records and 8-10 attributes. It supports regression, classification, clustering, and exploratory association-rule mining. Its severe class imbalance reflects an important real-world fraud-detection challenge, while anonymization limits direct interpretation of the original financial variables.
+
+## Dataset Requirement
+
+The raw CSV is required locally but is not committed to Git.
+
+The notebook uses the following order:
+
+1. Load `data/creditcard.csv` when it already exists.
+2. Otherwise, load `creditcard.csv` from the repository root.
+3. If neither exists, use:
+
+```python
+import kagglehub
+
+path = kagglehub.dataset_download("mlg-ulb/creditcardfraud")
+print("Path to dataset files:", path)
+```
+
+The notebook locates `creditcard.csv` in that KaggleHub download, copies it to the ignored local path below, and validates the expected schema:
+
+```text
+data/creditcard.csv
+```
+
+Confirm the local copy:
+
+```bash
+ls -lh data/creditcard.csv
+```
+
+Confirm Git ignores the raw dataset:
+
+```bash
+git check-ignore -v data/creditcard.csv
+```
+
+The raw CSV, `kaggle.json`, and authentication tokens must not be committed. No substitute dataset is used.
+
+No retail, university, demographic, synthetic-customer, or unrelated dataset is joined to these records.
+
+## Repository Structure
+
+```text
+MSCS_634_ProjectDeliverable_1/
+|-- .gitignore
+|-- README.md
+|-- requirements.txt
+|-- Project_Deliverable_1.ipynb
+|-- Project_Deliverable_2.ipynb
+|-- Project_Deliverable_3.ipynb
+|-- Project_Deliverable_4.ipynb
+|-- data/
+|   |-- README.md
+|   `-- creditcard.csv                     # Local only; excluded from Git
+|-- src/
+|   |-- __init__.py
+|   `-- project_utils.py
+|-- results/
+|   |-- deliverable_1_dataset_profile.csv
+|   |-- deliverable_1_cleaning_summary.csv
+|   |-- regression_metrics.csv
+|   |-- regression_cv_metrics.csv
+|   |-- regression_coefficients.csv
+|   |-- classification_metrics.csv
+|   |-- classification_tuning_results.csv
+|   |-- clustering_metrics.csv
+|   |-- cluster_profiles.csv
+|   |-- association_rules.csv
+|   `-- final_project_summary.csv
+|-- images/
+|   |-- deliverable_1/
+|   |-- deliverable_2/
+|   |-- deliverable_3/
+|   `-- final/
+|-- rubrics/
+|   |-- README.md
+|   |-- Residency_Day_2_Deliverable_2_Rubric.png
+|   |-- Residency_Day_2_Deliverable_3_Rubric.png
+|   `-- Residency_Day_3_Deliverable_4_Rubric.png
+|-- report/
+|   |-- MSCS_634_Final_Project_Report.docx
+|   `-- report_source.md
+`-- presentation/
+    |-- MSCS_634_Final_Project_Presentation.pptx
+    |-- presentation_script.md
+    `-- video_link.txt
+```
+
+## Deliverable 1 Workflow
+
+1. Load the approved dataset from a relative path and validate its exact schema.
+2. Inspect the head, shape, columns, data types, `info()`, descriptive statistics, target values, and original class distribution.
+3. Create a concise data dictionary for `Time`, `V1` through `V28`, `Amount`, and `Class`.
+4. Audit missing values without creating artificial missing records.
+5. Remove only exact duplicate rows and compare class counts before and after cleaning.
+6. Review amount percentiles, selected PCA ranges, and the largest transactions without automatically deleting statistical extremes.
+7. Quantify class counts, percentages, and the legitimate-to-fraud imbalance ratio.
+8. Add `Hour`, `DayIndex`, and `LogAmount` without overwriting the original variables.
+9. Save seven focused EDA visualizations and two CSV summaries.
+10. Translate the EDA findings into leakage-safe requirements for later modeling.
+
+## Cleaning Decisions
+
+- Missing values are reported for every column. Imputation is unnecessary when the executed audit finds no missingness.
+- Only exact duplicate rows are removed. Similar transactions are retained because they may represent separate legitimate purchases or meaningful fraud events.
+- Statistical extremes are inspected but not automatically deleted. Large amounts may be legitimate, and fraud itself may appear anomalous; blind IQR removal could destroy target signal.
+- Missing or invalid target values, unexpected classes, and negative `Time` or `Amount` values cause explicit validation errors rather than silent correction.
+- PCA features remain separate because their original meanings are anonymized and distinct components should not be merged.
+
+## Feature Engineering
+
+- `Hour = (Time / 3600) % 24`
+- `DayIndex = floor(Time / 86400)`
+- `LogAmount = log1p(Amount)`
+
+These are exploratory features. The original `Time` and `Amount` columns remain unchanged. Later model transformations and scaling will be learned within training pipelines after data splitting to prevent leakage.
+
+## Deliverable 1 Status
+
+- [x] Canonical notebook and repository structure prepared
+- [x] Approved dataset loader and schema validation implemented
+- [x] Missing-value and exact-duplicate audits implemented
+- [x] Extreme-value and class-imbalance analysis implemented
+- [x] Exploratory feature engineering implemented
+- [x] Seven required visualizations implemented
+- [x] Dataset-profile and cleaning-summary exports implemented
+- [x] Deliverables 2-4 canonical notebook roadmaps created
+- [x] Execute the notebook with `data/creditcard.csv`
+- [x] Reconcile this README with observed cleaning and EDA results
+- [x] Validate all generated Deliverable 1 artifacts
+- [ ] Create the Day 1 checkpoint commit
+
+## Observed Cleaning Summary
+
+| Measure | Result |
+|---|---:|
+| Original rows | 284,807 |
+| Missing cells | 0 |
+| Exact duplicate rows | 1,081 |
+| Rows after duplicate removal | 283,726 |
+| Original legitimate rows | 284,315 |
+| Original fraud rows | 492 |
+| Cleaned legitimate rows | 283,253 |
+| Cleaned fraud rows | 473 |
+| Legitimate duplicates removed | 1,062 |
+| Fraud duplicates removed | 19 |
+
+No imputation was required. Only exact duplicates were removed; statistical extremes remained available for analysis.
+
+## Key EDA Findings
+
+- Fraud represented 0.17% of cleaned transactions, with approximately 598.84 legitimate transactions per fraud transaction.
+- The Amount distribution was strongly right-skewed. Its 95th, 99th, and 99.9th percentiles were $365.34, $1,018.97, and $3,004.75, while the maximum was $25,691.16.
+- The median `LogAmount` was 3.1355 for legitimate transactions and 2.3814 for fraud transactions. Amount behavior differed by class but did not separate the classes by itself.
+- `V17`, `V14`, `V12`, `V10`, `V16`, and `V3` had the largest absolute PCA-feature correlations with `Class`.
+- `V17` had the strongest negative correlation with `Class` at -0.3135, while `V11` had the strongest positive correlation at 0.1491. These values indicate association, not causation.
+- Transaction volume peaked during hour 21 with 17,629 transactions. The highest observed hourly fraud rate was 1.45% during hour 2, based on 48 fraud records among 3,308 transactions.
+
+## EDA Guidance for Future Modeling
+
+- Classification splits and cross-validation must preserve the rare fraud proportion through stratification.
+- Accuracy alone is misleading; precision, recall, F1, ROC-AUC, and PR-AUC are required.
+- `Time`, `Amount`, and PCA features require thoughtful transformation or scaling inside leakage-safe pipelines.
+- Fraud records must not be deleted merely because they appear as outliers.
+- Class-weighted models provide an appropriate initial response to imbalance.
+- Calculations and comparisons use full precision; rounding is presentation-only.
+- PCA features may be statistically useful, but anonymization limits domain-level explanation and causal claims.
+
+## Modeling Plan
+
+- **Deliverable 2:** Predict `Amount` using Linear and Ridge regression with leakage-safe preprocessing and cross-validation. `Class`, `Amount`, and `LogAmount` will not be predictors.
+- **Deliverable 3 classification:** Compare class-weighted Logistic Regression and a tuned class-weighted Decision Tree using an untouched stratified test set.
+- **Deliverable 3 clustering:** Apply K-Means without `Class`, then reattach labels only for external cluster profiling.
+- **Deliverable 3 pattern mining:** Discretize a focused training-only feature set and clearly distinguish enriched-sample support from population prevalence.
+- **Deliverable 4:** Consolidate validated findings, limitations, ethical considerations, recommendations, a written report, and a presentation.
+
+## Challenges
+
+- Severe class imbalance makes accuracy an unreliable primary measure.
+- Anonymized PCA features constrain direct financial interpretation.
+- Dense visualizations require reproducible sampling for readability without changing analytical calculations.
+- Statistical extremes may be valid or fraud-related, so outlier handling requires context rather than automatic deletion.
+- The raw dataset must remain local because it is large and distributed through Kaggle.
+
+## Ethical Considerations
+
+Fraud prediction involves sensitive financial behavior. False negatives can create financial losses, while false positives can block legitimate customers. Anonymization protects original feature details but does not eliminate risks related to bias, privacy, model drift, or unequal error rates. Results should support human review and responsible risk controls rather than automatic punitive decisions.
+
+## How to Run
+
+From the repository root:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+jupyter notebook
+```
+
+Open `Project_Deliverable_1.ipynb`, select the `.venv` kernel, and use **Kernel > Restart Kernel and Run All Cells**.
+
+The notebook writes:
+
+- `results/deliverable_1_dataset_profile.csv`
+- `results/deliverable_1_cleaning_summary.csv`
+- seven PNG files under `images/deliverable_1/`
+
+## Rubric Coverage
+
+- **Dataset selection and description:** project purpose, dataset suitability, limitations, and ethical context
+- **Data inspection:** structure, data types, `info()`, statistics, target values, and data dictionary
+- **Cleaning:** missingness audit, exact-duplicate removal, class-impact comparison, and extreme-value review
+- **EDA:** imbalance, amount, time, selected PCA distributions, class correlation, and dense scatter sampling
+- **Documentation:** section objectives, major-block comments, interpretations, next-step connections, relative paths, and reproducible artifacts
+
+## Dataset Reference
+
+Machine Learning Group - ULB. *Credit Card Fraud Detection*. Kaggle.<br>
+https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud

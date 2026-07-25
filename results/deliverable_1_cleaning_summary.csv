@@ -1,0 +1,10 @@
+Measure,Value
+Original rows,284807
+Exact duplicate rows,1081
+Rows after duplicate removal,283726
+Original legitimate rows,284315
+Original fraud rows,492
+Cleaned legitimate rows,283253
+Cleaned fraud rows,473
+Legitimate duplicates removed,1062
+Fraud duplicates removed,19

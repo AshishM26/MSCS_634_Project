@@ -1,0 +1,65 @@
+# Python environments
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Operating system and editors
+.DS_Store
+.vscode/
+.idea/
+.cursor/
+.codex/
+.claude/
+.agents/
+AGENTS.md
+CLAUDE.md
+
+# Raw dataset
+creditcard.csv
+data/creditcard.csv
+data/*.zip
+
+# Kaggle credentials
+kaggle.json
+.kaggle/
+
+# Temporary validation files
+validation_*.ipynb
+*_validation.ipynb
+validation-results/
+validation_results/
+test-results/
+test_results/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+*.log
+
+# Temporary office files
+~$*.docx
+~$*.pptx
+report/~$*
+presentation/~$*
+
+# Large video and local recording files
+*.mp4
+*.mov
+*.m4v
+*.avi
+
+# Serialized model files
+*.pkl
+*.pickle
+*.joblib
+
+# Temporary exports
+tmp/
+temp/
+outputs/
+artifacts/

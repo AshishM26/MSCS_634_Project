@@ -1,0 +1,12 @@
+Measure,Value
+Original rows,284807
+Original columns,31
+Missing cells,0
+Exact duplicate rows,1081
+Unique target values,2
+Legitimate rows,284315
+Fraud rows,492
+Minimum Time,0.0
+Maximum Time,172792.0
+Minimum Amount,0.0
+Maximum Amount,25691.16
