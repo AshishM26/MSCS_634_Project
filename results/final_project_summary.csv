@@ -1,0 +1,21 @@
+Section,Entity,Measure,Value,Unit
+Data,Cleaned Dataset,Rows,283726,count
+Data,Fraud Class,Rows,473,count
+Data,Fraud Class,Rate,0.001667101358352777,proportion
+Regression,Ridge Regression,MAE,57.96630505533889,dollars
+Regression,Ridge Regression,RMSE,165.47040681317156,dollars
+Regression,Ridge Regression,R2,0.5331798184806775,score
+Classification,Decision Tree,Precision,0.0760649087221095,score
+Classification,Decision Tree,Recall,0.7894736842105263,score
+Classification,Decision Tree,F1,0.1387604070305272,score
+Classification,Decision Tree,ROC-AUC,0.9024668120319332,score
+Classification,Decision Tree,PR-AUC,0.7224436767928729,score
+Classification,Decision Tree,False Positives,911,count
+Classification,Decision Tree,False Negatives,20,count
+Clustering,K-Means,Selected K,4,count
+Clustering,K-Means,Silhouette Score,0.0762399404353565,score
+Clustering,Cluster 0,Observed Fraud Rate,0.0048752509320332,proportion
+Association,FP-Growth,Rule Count,319,count
+Association,Top Rule,Support,0.128747795414462,proportion
+Association,Top Rule,Confidence,1.0,proportion
+Association,Top Rule,Lift,6.0,ratio
