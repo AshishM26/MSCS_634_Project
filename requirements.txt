@@ -9,4 +9,3 @@ ipykernel
 kagglehub
 python-docx
 python-pptx
-nbformat
