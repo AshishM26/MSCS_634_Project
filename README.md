@@ -146,7 +146,7 @@ Run the notebooks in order with **Kernel > Restart Kernel and Run All Cells**:
 
 - [Final report](report/MSCS_634_Final_Project_Report.docx)
 - [Presentation](presentation/MSCS_634_Final_Project_Presentation.pptx)
-- [Video link](presentation/video_link.txt)
+- [Video link](https://go.screenpal.com/watch/cOiO2anUS93)
 
 ## References
 
